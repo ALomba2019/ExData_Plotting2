@@ -32,19 +32,18 @@ summary(NEI)
 
 #subset NEI data for Baltimore City, Maryland (fip == 24510)
 
-NEIMarlyland<-subset(NEI, fips == 24510)
-names(NEIMarlyland)
+NEIBAL<-subset(NEI, fips == 24510)
+names(NEIBAL)
 
 #Aggregate values for emissions per year in Baltimore
 
-EpYBAL <- aggregate(Emissions ~ year, data = NEIMarlyland, sum)
+NEIBAL <- aggregate(Emissions ~ year, data = NEIBAL, sum)
 
 ##Construct a bar plot of the total pollutants emissions (in tons) between 1999 and 2008 in Baltimore, Maryland
+#Save plot2 as a png file
 
-barplot(EpYBAL$Emissions, names.arg = EpYBAL$year, main = 'Total PM2.5 emissions between 1999 and 2008', xlab = 'years', ylab = 'PM2.5 (tons)')
+png(file = 'plot3.png', width = 480, height = 480)
 
-#Create a plot as a png file
-
-dev.copy(png, file = 'plot2.png', width = 480, height = 480)
+barplot(NEIBAL$Emissions, names.arg = NEIBAL$year, main = 'Total PM2.5 emissions between 1999 and 2008', xlab = 'years', ylab = 'PM2.5 (tons)')
 
 dev.off()
